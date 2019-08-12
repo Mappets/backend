@@ -10,7 +10,7 @@ Plataforma colaborativa, onde qualquer pessoa pode se cadastrar. Haverá um Mapa
 
 Create a virtualenv to start the settings. Install if you don't have using the following commands: `sudo apt install python-virtualenv` and `sudo apt-get install python3-venv`.
 
-Create the local virtualenv: `python3 -m env env`
+Create the local virtualenv: `python3 -m venv env`
 
 Activate the virtualenv: `source env/bin/activate`
 
