@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Animal, Breed
+from .models import Pet, Breed
 
-admin.site.register(Animal)
+admin.site.register(Pet)
 admin.site.register(Breed)
 

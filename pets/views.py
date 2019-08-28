@@ -1,20 +1,20 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Animal, AnimalHistory
-from .serializers import AnimalSerializer, AnimalHistorySerializer
+from .models import Pet, History
+from .serializers import PetSerializer, PetHistorySerializer
 from rest_framework.response import Response
 
 
-class AnimalViewSet(viewsets.ViewSet):
+class PetViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = Animal.objects.all()
-        serializer = AnimalSerializer(queryset, many=True)
+        queryset = Pet.objects.all()
+        serializer = PetSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request, pk=None):
         try:
             req = request.data
-            animal = Animal.objects.create(
+            pet = Pet.objects.create(
                 name=req['name'],
                 age=req['age'],
                 color=req['color'],
@@ -22,22 +22,22 @@ class AnimalViewSet(viewsets.ViewSet):
                 breed_id=req['breed'],
                 species=req['species']
             )
-            history = AnimalHistory.objects.create(
-                animal=animal,
+            history = History.objects.create(
+                pet=pet,
                 address=req['address'],
                 latitude=req['latitude'],
                 longitude=req['longitude'],
                 # TODO: user_id tem que ser o id do usuario logado. Implementar
                 user_id=1
             )
-            serializer = AnimalSerializer(animal)
+            serializer = PetSerializer(pet)
             return Response(serializer.data)
         except Exception as e:
             pass
 
 
-class AnimalHistoryViewSet(viewsets.ViewSet):
+class PetHistoryViewSet(viewsets.ViewSet):
     def list(self, request):
-        queryset = AnimalHistory.objects.all()
-        serializer = AnimalHistorySerializer(queryset, many=True)
+        queryset = History.objects.all()
+        serializer = PetHistorySerializer(queryset, many=True)
         return Response(serializer.data)

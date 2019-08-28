@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from animal.views import AnimalViewSet, AnimalHistoryViewSet
+from pets.views import PetViewSet, PetHistoryViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('animais', AnimalViewSet, basename='animal')
+router.register('pets', PetViewSet, basename='pets')
 router.register(
-    'animais-history', AnimalHistoryViewSet, basename='animal-history')
+    'pets-history', PetHistoryViewSet, basename='pets-history')
 
 
 urlpatterns = [
