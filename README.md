@@ -1,4 +1,15 @@
-# Mappets
+<!-- PROJECT LOGO -->
+<p align="center">
+  <a href="your-application-url-here">
+    <img src="your-picture.png" width="200px" alt="Mappets brand">
+  </a>
+
+  <h3 align="center">Mappets Back-End</h3>
+</p>
+
+----
+
+### About this repository
 
 This repository contains the Back-End of the application. 
 
