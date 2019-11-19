@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.translation import gettext as _
 
 
 class Breed(models.Model):
@@ -9,8 +9,8 @@ class Breed(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Raças"
-        verbose_name = "Raça"
+        verbose_name_plural = _('Breeds')
+        verbose_name = _('Breed')
 
 
 class Pet(models.Model):

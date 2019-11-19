@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class AnimalConfig(AppConfig):
-    name = 'animal'
+class PetConfig(AppConfig):
+    name = 'pets'
