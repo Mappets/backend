@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-19 18:41+0000\n"
+"POT-Creation-Date: 2019-11-20 17:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,13 +34,33 @@ msgstr "Telefone"
 msgid "Category"
 msgstr "Categoria"
 
-#: organizations/models.py:33 organizations/models.py:34
+#: organizations/models.py:33
 msgid "Organizations"
 msgstr "Organizações"
 
+#: organizations/models.py:34
+msgid "Organization"
+msgstr "Organização"
+
+#: pets/models.py:12
+msgid "Breeds"
+msgstr "Raças"
+
+#: pets/models.py:13
+msgid "Breed"
+msgstr "Raça"
+
+#: users/models.py:19
+msgid "Users"
+msgstr "Usuários"
+
+#: users/models.py:20
+msgid "User"
+msgstr "Usuário"
+
 #: venv/lib/python3.6/site-packages/django/contrib/messages/apps.py:7
 msgid "Messages"
-msgstr ""
+msgstr "Mensagens"
 
 #: venv/lib/python3.6/site-packages/django/contrib/sitemaps/apps.py:7
 msgid "Site Maps"
@@ -1212,6 +1232,3 @@ msgstr ""
 #: venv/lib/python3.6/site-packages/django/views/templates/default_urlconf.html:408
 msgid "Connect, get help, or contribute"
 msgstr ""
-
-#~ msgid "Organization"
-#~ msgstr "Organização"
