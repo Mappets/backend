@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mappets.urls'
@@ -133,3 +134,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
+
+# LANGUAGES = [
+#     ('de', _('German')),
+#     ('en', _('English')),
+# ]
