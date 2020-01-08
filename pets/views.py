@@ -1,8 +1,17 @@
 from django.shortcuts import render
+from django.views.generic import View
+from django.http.response import HttpResponse
 from rest_framework import viewsets
+from rest_framework.response import Response
+
+
 from .models import Pet, History
 from .serializers import PetSerializer, PetHistorySerializer
-from rest_framework.response import Response
+
+class IndexView(View):
+
+    def get(self, request, *args, **kw):
+        return HttpResponse(content='Teste')
 
 
 class PetViewSet(viewsets.ViewSet):
