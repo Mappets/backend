@@ -36,16 +36,16 @@ class Pet(models.Model):
         ('G', 'GATO'),
     )
     name = models.CharField(verbose_name='Nome', max_length=50, null=False)
-    age = models.IntegerField(verbose_name='Idade')
-    color = models.CharField(verbose_name='Cor', max_length=20, choices=COLORS)
+    age = models.IntegerField(verbose_name='Idade', null=True)
+    color = models.CharField(verbose_name='Cor', max_length=20, choices=COLORS, null=True)
     gender = models.CharField(
-        verbose_name='Sexo', max_length=1, choices=GENDER)
+        verbose_name='Sexo', max_length=1, choices=GENDER, null=True)
     size = models.CharField(
-        default='MD', verbose_name='Porte', max_length=50, choices=SIZE)
+        default='MD', verbose_name='Porte', max_length=50, choices=SIZE, null=True)
     breed = models.ForeignKey(
-        Breed, verbose_name='Raça', on_delete=models.CASCADE)
+        Breed, verbose_name='Raça', on_delete=models.CASCADE, null=True)
     species = models.CharField(
-        max_length=1, verbose_name='Espécie', choices=SPECIES)
+        max_length=1, verbose_name='Espécie', choices=SPECIES, null=True)
 
     class Meta:
         verbose_name_plural = "Pets"

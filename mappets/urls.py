@@ -13,11 +13,6 @@ router.register('pets', PetViewSet, basename='pets')
 router.register('history', PetHistoryViewSet, basename='history')
 
 
-'''
-Define as rotas da aplicação
-'''
-
-
 urlpatterns = [
     path('', IndexView.as_view()),
     path('api/v1/', include(router.urls)),

@@ -11,7 +11,7 @@ from .serializers import PetSerializer, PetHistorySerializer
 class IndexView(View):
 
     def get(self, request, *args, **kw):
-        return HttpResponse(content='Teste')
+        return HttpResponse(content='The Mappets API is working')
 
 
 class PetViewSet(viewsets.ViewSet):
