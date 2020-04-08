@@ -51,6 +51,7 @@ LOCAL_APPS = [
     'users',
     'organizations',
 ]
+
 INSTALLED_APPS += THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [

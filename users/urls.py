@@ -1,8 +1,6 @@
 from django.urls import path
 from users.views import UserViewSet
-from rest_framework import routers
-
-router = routers.DefaultRouter()
+from mappets.urls import router
 
 # Users API routes
 router.register('users/', UserViewSet)
