@@ -8,11 +8,6 @@ from rest_framework.response import Response
 from .models import Pet, History
 from .serializers import PetSerializer, PetHistorySerializer
 
-class IndexView(View):
-
-    def get(self, request, *args, **kw):
-        return HttpResponse(content='The Mappets API is working')
-
 
 class PetViewSet(viewsets.ViewSet):
     def list(self, request):

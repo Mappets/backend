@@ -3,7 +3,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from organizations.views import OrganizationViewSet
-from pets.views import PetViewSet, PetHistoryViewSet, IndexView
+from pets.views import PetViewSet, PetHistoryViewSet
 
 router = routers.DefaultRouter()
 
@@ -14,8 +14,7 @@ router.register('history', PetHistoryViewSet, basename='history')
 
 
 urlpatterns = [
-    path('', IndexView.as_view()),
-    path('api/v1/', include(router.urls)),
+    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]

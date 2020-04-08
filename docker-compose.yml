@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: . 
+      dockerfile: ./compose/django/Dockerfile
+      labels:
+        - "django"
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/web"

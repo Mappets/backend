@@ -25,7 +25,7 @@ SECRET_KEY = '^__k*x@#5crsg0(cnotdxirhf%hewkkfaaeq+@z$xfw+j*6#ut'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,13 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+THIRD_APPS = [
     'rest_framework',
-    'pets',
-    'users',
-    'organizations',
     'rest_framework_filters',
     'django_extensions',
 ]
+
+LOCAL_APPS = [
+    'pets',
+    'users',
+    'organizations',
+]
+INSTALLED_APPS += THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
