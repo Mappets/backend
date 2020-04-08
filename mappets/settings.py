@@ -43,6 +43,7 @@ THIRD_APPS = [
     'rest_framework',
     'rest_framework_filters',
     'django_extensions',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
@@ -53,6 +54,7 @@ LOCAL_APPS = [
 INSTALLED_APPS += THIRD_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +149,9 @@ LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 #     ('de', _('German')),
 #     ('en', _('English')),
 # ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+       'http://localhost:8080',
+       'http://localhost:8081',
+)
