@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 
-from .models import Pet, History, Breed
-from .serializers import PetSerializer, PetHistorySerializer, PetBreedSerializer
+from .models import Pet, History, Breed, Gender, Color, Size, Specie
+
+from .serializers import PetSerializer, PetHistorySerializer, PetBreedSerializer, PetGenderSerializer, PetColorSerializer, PetSizeSerializer, PetSpecieSerializer
 
 
 class PetViewSet(viewsets.ViewSet):
@@ -49,19 +50,40 @@ class PetHistoryViewSet(ModelViewSet):
         queryset = History.objects.first()
         serializer = PetHistorySerializer(queryset, many=True)
         return Response(serializer.data)
-    
+
     def create(self, request):
         pass
 
     def delete(self, request):
         pass
-    
+
     def update(self, request):
         pass
 
     def retrieve(self, request, *args, **kwargs):
         pass
 
+
 class PetBreedViewSet(ModelViewSet):
     queryset = Breed.objects.all()
     serializer_class = PetBreedSerializer
+
+
+class PetGenderViewSet(ModelViewSet):
+    queryset = Gender.objects.all()
+    serializer_class = PetGenderSerializer
+
+
+class PetColorViewSet(ModelViewSet):
+    queryset = Color.objects.all()
+    serializer_class = PetColorSerializer
+
+
+class PetSizeViewSet(ModelViewSet):
+    queryset = Size.objects.all()
+    serializer_class = PetSizeSerializer
+
+
+class PetSpecieViewSet(ModelViewSet):
+    queryset = Specie.objects.all()
+    serializer_class = PetSpecieSerializer
