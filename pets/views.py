@@ -3,10 +3,11 @@ from django.views.generic import View
 from django.http.response import HttpResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 
-from .models import Pet, History
-from .serializers import PetSerializer, PetHistorySerializer
+from .models import Pet, History, Breed
+from .serializers import PetSerializer, PetHistorySerializer, PetBreedSerializer
 
 
 class PetViewSet(viewsets.ViewSet):
@@ -40,8 +41,27 @@ class PetViewSet(viewsets.ViewSet):
             pass
 
 
-class PetHistoryViewSet(viewsets.ViewSet):
+class PetHistoryViewSet(ModelViewSet):
+    queryset = History.objects.all()
+    serializer_class = PetHistorySerializer
+
     def list(self, request):
-        queryset = History.objects.all()
+        queryset = History.objects.first()
         serializer = PetHistorySerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        pass
+
+    def delete(self, request):
+        pass
+    
+    def update(self, request):
+        pass
+
+    def retrieve(self, request, *args, **kwargs):
+        pass
+
+class PetBreedViewSet(ModelViewSet):
+    queryset = Breed.objects.all()
+    serializer_class = PetBreedSerializer
