@@ -17,7 +17,7 @@ RUN apk update \
   # matplotlib dependecies
   && apk add g++
 
-RUN pip install cython numpy
+RUN pip install cython
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements.txt /requirements/requirements.txt
