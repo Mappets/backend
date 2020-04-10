@@ -26,6 +26,5 @@ RUN pip install -r /requirements/requirements.txt
 WORKDIR /web
 ADD . /web
 RUN python manage.py makemigrations
-RUN python manage.py migrate
 
 # ENTRYPOINT ["/entrypoint"]
