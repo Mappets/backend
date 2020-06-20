@@ -164,6 +164,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         # By default we set everything to admin,
         #   then open endpoints on a case-by-case basis
+        'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.IsAdminUser',
     ),
     'TEST_REQUEST_RENDERER_CLASSES': (
@@ -172,8 +173,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.TemplateHTMLRenderer'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',

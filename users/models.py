@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext as _
+from django.contrib.auth.base_user import AbstractBaseUser
 from organizations.models import Organization
 
 
-class User(models.Model):
+class User(AbstractBaseUser):
     '''
     Representação da model user
     '''

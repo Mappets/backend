@@ -10,6 +10,13 @@ PetBreedViewSet, PetGenderViewSet,
 PetColorViewSet, PetSizeViewSet,
 PetSpecieViewSet)
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+from rest_framework_jwt.views import obtain_jwt_token
+
 from users.views import UserViewSet
 
 router = routers.DefaultRouter()
@@ -28,7 +35,9 @@ router.register('history', PetHistoryViewSet, basename='history')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-token-auth/', obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('api-token-auth/', obtain_auth_token),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
 ]
