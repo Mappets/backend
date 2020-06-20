@@ -4,51 +4,35 @@
     <img src="https://avatars3.githubusercontent.com/u/57954053?s=200&v=4" width="200px" alt="Mappets brand">
   </a>
 
-  <h3 align="center">Mappets Back-End</h3>
+  <h3 align="center">Mappets</h3>
 </p>
 
----
+----
 
-### About this repository
+## About 
 
-This repository contains the Back-End of the application.
+Mappets is an open collaborative project to help animals.
 
-### App description
+### Description
 
-Plataforma colaborativa, onde qualquer pessoa pode se cadastrar. Haverá um Mapa listando o posicionamento de:
+Web and mobile application the platform is collaborative, where anyone can register.
 
-- Animais para adoção
-- Lares temporários
-- Clínicas voluntárias
+There will be a Map listing the placement of:
 
-Em cada um desses itens, será possível obter mais informações a respeito deste. Por ser colaborativa, qualquer pessoa pode fotografar um animal de rua, subir para a plataforma e classificar seu estado.
+* Animals for adoption
+* Temporary homes
+* Voluntary clinics.
 
-### Settings
+In each of these items, it will be possible to obtain more information about this.
 
-Create a virtualenv to start the settings. Install if you don't have using the following commands: `sudo apt install python-virtualenv` and `sudo apt-get install python3-venv`.
+Because it is collaborative, anyone can photograph a street animal, climb onto the platform, classify its status.
 
-Create the local virtualenv: `python3 -m venv venv`
+## Getting started
 
-Activate the virtualenv: `source env/bin/activate`
+### Contributing with code and tech skills
 
-### Installation
+Make sure you have read our [contributing guide](CONTRIBUTING.md).
 
-Mappets requires [Python3](https://www.python.org/) v3+ to run.
+### Supporting
 
-Install the dependencies and devDependencies and start the server.
-
-```shell
-cd mappets
-```
-
-Use the `pip install` to install from `requirements.txt` file.
-
-```python
-pip install -r requirements.txt
-```
-
-Use the `manage.py` file to run the server.
-
-```python
-python manage.py runserver
-```
+* Join our crowd funding on Apoia.se.
