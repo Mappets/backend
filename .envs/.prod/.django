@@ -1,0 +1,41 @@
+# General
+# ------------------------------------------------------------------------------
+APPLICATION_DOMAIN=https://www.mappets.app/
+ALLOWED_HOSTS=api.mappets.app
+CORS_ORIGIN_ALLOW_ALL=True
+DJANGO_CONFIGURATION=Production
+DJANGO_DEBUG=False
+DJANGO_SETTINGS_MODULE=mappets_backend.config
+SECRET_KEY=f%-94$+jb9sx837h6^2o=bj-4r
+
+# PostgreSQL
+# ------------------------------------------------------------------------------
+RDS_HOSTNAME=mappets-homolog.cfodshxidwvc.us-east-1.rds.amazonaws.com
+RDS_PORT=5432
+RDS_DB_NAME=ebdb
+RDS_USERNAME=mappets
+RDS_PASSWORD=vwk6uZCXLE7fAZ6
+
+# AWS
+# ------------------------------------------------------------------------------
+DJANGO_AWS_ACCESS_KEY_ID=AKIAZDQSOQW4B7JUMHTG
+DJANGO_AWS_SECRET_ACCESS_KEY=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
+DJANGO_AWS_STORAGE_BUCKET_NAME=mappets-homolog-us-east-1-626030183864
+
+# Email
+# ------------------------------------------------------------------------------
+EMAIL_HOST=smtp.sendgrid.net
+EMAIL_HOST_PASSWORD=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
+EMAIL_HOST_USER=apikey
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+# ------------------------------------------------------------------------------
+CELERY_FLOWER_USER=mappets
+CELERY_FLOWER_PASSWORD=285fd2c21b587d17344dc563ea8523dad5b5d24162314b0d092cb263d76792f8

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+
+while ! nc -z redis 6379;
+do
+    echo esperando conectar com cache;
+    sleep 5;
+done;
+echo Connected;
+celery -A mappets.celery_app worker -l INFO

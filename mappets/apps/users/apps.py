@@ -5,4 +5,4 @@ class UserConfig(AppConfig):
     '''
     Define o nome do app
     '''
-    name = 'users'
+    name = 'mappets.apps.users'

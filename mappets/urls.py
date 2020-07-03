@@ -4,11 +4,12 @@ from django.urls import path, include
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
-from organizations.views import OrganizationViewSet
-from pets.views import (PetViewSet, PetHistoryViewSet,
-PetBreedViewSet, PetGenderViewSet,
-PetColorViewSet, PetSizeViewSet,
-PetSpecieViewSet)
+from mappets.apps.organizations.views import OrganizationViewSet
+from mappets.apps.pets.views import (PetViewSet, PetHistoryViewSet,
+        PetBreedViewSet, PetGenderViewSet,
+        PetColorViewSet, PetSizeViewSet,
+        PetSpecieViewSet)
+from mappets.apps.users.views import UserViewSet
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -17,7 +18,6 @@ from rest_framework_simplejwt.views import (
 
 from rest_framework_jwt.views import obtain_jwt_token
 
-from users.views import UserViewSet
 
 router = routers.DefaultRouter()
 

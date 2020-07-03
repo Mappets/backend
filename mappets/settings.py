@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 from decouple import config
 
+import environ
+env = environ.Env()
+
 from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,17 +45,28 @@ INSTALLED_APPS = [
 ]
 
 THIRD_APPS = [
+    'django_createsuperuserwithpassword',
     'corsheaders',
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_filters',
+    # "django_celery_beat",
+    # "crispy_forms",
+    # "allauth",
+    # "allauth.account",
+    # "allauth.socialaccount",
+    "django_filters",
+    # "django_redis",
+    # "constance",
+    # "rest_framework_swagger",
+    # 'extra_views',
 ]
 
 LOCAL_APPS = [
-    'pets',
-    'users',
-    'organizations',
+    'mappets.apps.users',
+    'mappets.apps.pets',
+    'mappets.apps.organizations',
 ]
 
 INSTALLED_APPS += THIRD_APPS + LOCAL_APPS
@@ -70,7 +84,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mappets.urls'
-
+AUTH_USER_MODEL = 'users.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -93,20 +107,7 @@ WSGI_APPLICATION = 'mappets.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': config('DB_NAME'),
-    #     'USER': config('DB_USER'),
-    #     'PASSWORD': config('DB_PASSWORD'),
-    #     'HOST': config('DB_HOST'),
-    #     'PORT': config('DB_PORT', default='5432'),
-    # },
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": env.db("DATABASE_URL", default='')}
 
 
 # Password validation

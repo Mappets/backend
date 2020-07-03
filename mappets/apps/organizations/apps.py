@@ -5,4 +5,4 @@ class OrganizationConfig(AppConfig):
     '''
     Define o nome do app
     '''
-    name = 'organizations'
+    name = 'mappets.apps.organizations'

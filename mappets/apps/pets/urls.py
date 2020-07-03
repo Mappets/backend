@@ -1,5 +1,5 @@
 from django.urls import path
-from pets.views import PetViewSet, PetHistoryViewSet
+from mappets.apps.pets.views import PetViewSet, PetHistoryViewSet
 from mappets.urls import router
 
 # Pets API routes
