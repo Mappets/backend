@@ -7,11 +7,13 @@ from django.utils.translation import gettext as _
 
 from mappets.apps.organizations.models import Organization
 from .managers import CustomUserManager
+from uuid import uuid4
 
 class User(AbstractUser):
     '''
     Representação da model user
     '''
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(verbose_name="Name", max_length=50)
     email = models.CharField(verbose_name="Email", max_length=50,unique=True)
     phone = models.CharField(verbose_name="Phone", max_length=50)

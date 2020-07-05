@@ -1,4 +1,4 @@
-FROM postgres:11.3
+FROM postgis/postgis:11-3.0-alpine
 
 
 COPY ./compose/dev/postgres/maintenance /usr/local/bin/maintenance

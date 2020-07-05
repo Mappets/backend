@@ -8,6 +8,6 @@ set -o nounset
 python manage.py migrate
 python manage.py createsuperuserwithpassword \
         --password mappets \
-        --email mappets@mappets.mappets \
+        --email adm@mappets.app \
         --preserve
 python manage.py runserver 0.0.0.0:8000

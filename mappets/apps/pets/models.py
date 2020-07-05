@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 
 class Breed(models.Model):
@@ -35,7 +35,8 @@ class Gender(models.Model):
 class Color(models.Model):
     '''
     Representação da model color
-    '''     
+    '''
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     description = models.CharField(verbose_name=_('Description'), max_length=255)
 
@@ -108,10 +109,10 @@ class History(models.Model):
     )
     address = models.CharField(
         default=None, verbose_name="Address", max_length=50)
-    latitude = models.CharField(
-        default=None, verbose_name="Latitude", max_length=50)
-    longitude = models.CharField(
-        default=None, verbose_name="Longitude", max_length=50)
+    latitude = models.FloatField(
+        default=None, verbose_name="Latitude")
+    longitude = models.FloatField(
+        default=None, verbose_name="Longitude")
     user = models.ForeignKey(
         "users.User", default=None, verbose_name="User",
         on_delete=models.CASCADE)

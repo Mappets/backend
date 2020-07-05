@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+
 import os
 from decouple import config
+from django.utils.translation import ugettext_lazy as _
 
 import environ
 env = environ.Env()
@@ -61,6 +63,8 @@ THIRD_APPS = [
     # "constance",
     # "rest_framework_swagger",
     # 'extra_views',
+    'django_populate',
+    'django_tables2',
 ]
 
 LOCAL_APPS = [
@@ -75,12 +79,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mappets.urls'
@@ -134,6 +138,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
+FAKER_LOCALE = LANGUAGE_CODE
+
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
@@ -150,10 +156,10 @@ STATIC_URL = '/static/'
 
 LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 
-# LANGUAGES = [
-#     ('de', _('German')),
-#     ('en', _('English')),
-# ]
+LANGUAGES = [
+    ('en', _('English')),
+    ('pt-br', _('Brazilian Portuguese')),
+]
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 CORS_ORIGIN_WHITELIST = (

@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: mappets/apps/organizations/models.py:9
 msgid "Key"
@@ -27,21 +27,21 @@ msgstr ""
 #: mappets/apps/pets/models.py:25 mappets/apps/pets/models.py:41
 #: mappets/apps/pets/models.py:56 mappets/apps/pets/models.py:71
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: mappets/apps/organizations/models.py:16
 msgid "Categories"
-msgstr ""
+msgstr "Categorias"
 
 #: mappets/apps/organizations/models.py:17
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: mappets/apps/organizations/models.py:24 mappets/apps/pets/models.py:9
 #: mappets/apps/pets/models.py:24 mappets/apps/pets/models.py:40
 #: mappets/apps/pets/models.py:55 mappets/apps/pets/models.py:70
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: mappets/apps/organizations/models.py:26
 msgid "Email"
@@ -49,80 +49,80 @@ msgstr ""
 
 #: mappets/apps/organizations/models.py:27
 msgid "Phone"
-msgstr ""
+msgstr "Telefone"
 
 #: mappets/apps/organizations/models.py:34
 msgid "Organizations"
-msgstr ""
+msgstr "Organizações"
 
 #: mappets/apps/organizations/models.py:35
 msgid "Organization"
-msgstr ""
+msgstr "Organização"
 
 #: mappets/apps/pets/models.py:16
 msgid "Breeds"
-msgstr ""
+msgstr "Raças"
 
 #: mappets/apps/pets/models.py:17
 msgid "Breed"
-msgstr ""
+msgstr "Raça"
 
 #: mappets/apps/pets/models.py:31
 msgid "Genders"
-msgstr ""
+msgstr "Gêneros"
 
 #: mappets/apps/pets/models.py:32
 msgid "Gender"
-msgstr ""
+msgstr "Genero"
 
 #: mappets/apps/pets/models.py:47
 msgid "Colors"
-msgstr ""
+msgstr "Cores"
 
 #: mappets/apps/pets/models.py:48
 msgid "Color"
-msgstr ""
+msgstr "Cor"
 
 #: mappets/apps/pets/models.py:62
 msgid "Sizes"
-msgstr ""
+msgstr "Tamanhos"
 
 #: mappets/apps/pets/models.py:63
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: mappets/apps/pets/models.py:77
 msgid "Species"
-msgstr ""
+msgstr "Espécies"
 
 #: mappets/apps/pets/models.py:78
 msgid "Specie"
-msgstr ""
+msgstr "Espécie"
 
 #: mappets/apps/users/managers.py:15
 msgid "The Email must be set"
-msgstr ""
+msgstr "O Email deve ser informado"
 
 #: mappets/apps/users/managers.py:31
 msgid "Superuser must have is_staff=True."
-msgstr ""
+msgstr "Superusuário deve ter is_staff=True."
 
 #: mappets/apps/users/managers.py:33
 msgid "Superuser must have is_superuser=True."
-msgstr ""
+msgstr "Superusuário deve ter is_superuser=True."
 
 #: mappets/apps/users/models.py:35
 msgid "Users"
-msgstr ""
+msgstr "Usuários"
 
 #: mappets/apps/users/models.py:36
 msgid "User"
-msgstr ""
+msgstr "Usário"
 
 #: mappets/settings.py:161
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Português Brasileiro"
 
 #: mappets/settings.py:162
 msgid "English"
-msgstr ""
+msgstr "Inglês"
