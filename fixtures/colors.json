@@ -1,0 +1,23 @@
+[
+  {
+    "model": "pets.color",
+    "pk": 1,
+    "fields": {
+      "name": "Preto"
+    }
+  },
+  {
+    "model": "pets.color",
+    "pk": 2,
+    "fields": {
+      "name": "Branco"
+    }
+  },
+  {
+    "model": "pets.color",
+    "pk": 3,
+    "fields": {
+      "name": "Caramelo"
+    }
+  }
+]

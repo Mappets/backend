@@ -1,0 +1,16 @@
+[
+  {
+    "model": "pets.gender",
+    "pk": 1,
+    "fields": {
+      "name": "Masculino"
+    }
+  },
+  {
+    "model": "pets.gender",
+    "pk": 2,
+    "fields": {
+      "name": "Feminino"
+    }
+  }
+]

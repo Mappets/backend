@@ -1,0 +1,23 @@
+[
+  {
+    "model": "organizations.category",
+    "pk": 1,
+    "fields": {
+      "name": "Organização Não Governamental (ONG)"
+    }
+  },
+  {
+    "model": "organizations.category",
+    "pk": 2,
+    "fields": {
+      "name": "Casa de Ração"
+    }
+  },
+  {
+    "model": "organizations.category",
+    "pk": 3,
+    "fields": {
+      "name": "Lar de adoção"
+    }
+  }
+]

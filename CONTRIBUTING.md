@@ -25,6 +25,7 @@ Example to run only the back-end:
 ```console
 $ docker-compose run —rm web pip install -r requirements.txt
 $ docker-compose app python manage.py
+$ docker-compose app python manage.py loaddata fixtures/*.json
 $ docker-compose app python manage.py createsuperuser
 ```
 

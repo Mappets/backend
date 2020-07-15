@@ -1,0 +1,23 @@
+[
+  {
+    "model": "pets.size",
+    "pk": 1,
+    "fields": {
+      "name": "Grande porte"
+    }
+  },
+  {
+    "model": "pets.size",
+    "pk": 2,
+    "fields": {
+      "name": "Médio porte"
+    }
+  },
+  {
+    "model": "pets.size",
+    "pk": 3,
+    "fields": {
+      "name": "Pequeno porte"
+    }
+  }
+]

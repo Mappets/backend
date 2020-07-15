@@ -1,0 +1,23 @@
+[
+  {
+    "model": "pets.breed",
+    "pk": 1,
+    "fields": {
+      "name": "Vira Lata"
+    }
+  },
+  {
+    "model": "pets.breed",
+    "pk": 2,
+    "fields": {
+      "name": "Golden Retriever"
+    }
+  },
+  {
+    "model": "pets.breed",
+    "pk": 3,
+    "fields": {
+      "name": "Rottweiler"
+    }
+  }
+]

@@ -74,7 +74,7 @@ ROOT_URLCONF = 'mappets.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,7 +102,7 @@ DATABASES = {
     #     'HOST': config('DB_HOST'),
     #     'PORT': config('DB_PORT', default='5432'),
     # },
-        'default': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
@@ -147,7 +147,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
 
 # LANGUAGES = [
 #     ('de', _('German')),
@@ -156,8 +156,8 @@ LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 CORS_ORIGIN_WHITELIST = (
-       'http://localhost:8080',
-       'http://localhost:8081',
+    'http://localhost:8080',
+    'http://localhost:8081',
 )
 
 REST_FRAMEWORK = {
@@ -187,3 +187,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
+
+FIXTURE_DIRS = ['fixtures']
