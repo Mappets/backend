@@ -18,8 +18,11 @@ from rest_framework_simplejwt.views import (
 )
 
 from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_swagger.views import get_swagger_view
+
 
 router = routers.DefaultRouter()
+schema_view = get_swagger_view(title='Mappets API')
 
 # Organizations API routes
 router.register('organizations', OrganizationViewSet)
@@ -36,8 +39,9 @@ router.register('history', PetHistoryViewSet, basename='history')
 urlpatterns = [
     path('', include(router.urls)),
     path('', include('django_populate.urls')),
+    path('docs/', schema_view),
     # path('api-token-auth/', obtain_auth_token),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('admin/', admin.site.urls),

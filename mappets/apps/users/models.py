@@ -3,7 +3,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from mappets.apps.organizations.models import Organization
 from .managers import CustomUserManager

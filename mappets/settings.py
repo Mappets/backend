@@ -53,6 +53,7 @@ THIRD_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_filters',
+    'rest_framework_swagger',
     # "django_celery_beat",
     # "crispy_forms",
     # "allauth",
@@ -179,6 +180,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.TemplateHTMLRenderer'
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
@@ -194,3 +196,15 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ivoryit@hotmail.com'
+EMAIL_HOST_PASSWORD = 'IvoryEmail123@'
+EMAIL_FEEDBACK = 'julio.silva@ivoryit.com.br'
+
+#DJANGO REST SWAGGER
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
