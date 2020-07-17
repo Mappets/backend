@@ -52,7 +52,7 @@ RUN chmod +x /start-flower
 
 
 # RUN chown -R django:django /django
-# USER django
+USER root
 
 WORKDIR /django
 

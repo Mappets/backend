@@ -41,6 +41,7 @@ class PetSizeSerializer(serializers.ModelSerializer):
 
 
 class PetSpecieSerializer(serializers.ModelSerializer):
+    breeds = PetBreedSerializer(many=True, read_only=True)
     class Meta:
         model = Specie
         fields = ('__all__')

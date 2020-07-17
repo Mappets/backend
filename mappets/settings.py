@@ -66,6 +66,7 @@ THIRD_APPS = [
     # 'extra_views',
     'django_populate',
     'django_tables2',
+    'django_seed',
 ]
 
 LOCAL_APPS = [

@@ -9,6 +9,26 @@ from mappets.apps.organizations.models import Organization
 from .managers import CustomUserManager
 from uuid import uuid4
 
+from django.db import models
+
+class CommonInfo(models.Model):
+    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('Updated At'), auto_now=True)
+    deleted_at = models.DateTimeField(_('Deleted At'), blank=True, null=True)
+    deleted = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+    
+    def delete(self):
+        self.deleted_at = timezone.now()
+        self.deleted = True
+        self.save()
+
+    def hard_delete(self):
+        super(CommonInfo, self).delete()
+
+
 class User(AbstractUser):
     '''
     Representação da model user
@@ -24,6 +44,7 @@ class User(AbstractUser):
     date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()

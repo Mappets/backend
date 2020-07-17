@@ -30,7 +30,7 @@ up: ## Spin up the project
 	docker-compose -p mappets up --build
 
 dev:
-	docker-compose -f docker-compose.yml -f docker-compose-dev.yml -p mappets up --build
+	docker-compose -f docker-compose.yml -f docker-compose-dev.yml -p mappets up --build -d
 
 test:
 	docker-compose -f docker-compose.yml -p mappets run --rm django python manage.py test

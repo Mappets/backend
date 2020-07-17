@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.http.response import HttpResponse
-from rest_framework import viewsets
+from rest_framework import mixins,viewsets, generics as g
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+
 
 
 from .models import Pet, History, Breed, Gender, Color, Size, Specie
@@ -47,7 +49,7 @@ class PetHistoryViewSet(ModelViewSet):
     serializer_class = PetHistorySerializer
 
     def list(self, request):
-        queryset = History.objects.first()
+        queryset = History.objects.all()
         serializer = PetHistorySerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -64,26 +66,42 @@ class PetHistoryViewSet(ModelViewSet):
         pass
 
 
-class PetBreedViewSet(ModelViewSet):
+class PetBreedViewSet(mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
+    """
+    Breed GET List
+    ---
+    serializer: .serializers.PetBreedSerializer
+    parameters:
+        - name: string
+        - description: 'Foobar long description goes here'
+    """
     queryset = Breed.objects.all()
     serializer_class = PetBreedSerializer
 
 
-class PetGenderViewSet(ModelViewSet):
+class PetGenderViewSet(mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = Gender.objects.all()
     serializer_class = PetGenderSerializer
 
 
-class PetColorViewSet(ModelViewSet):
+
+
+class PetColorViewSet(mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = Color.objects.all()
     serializer_class = PetColorSerializer
+    permission_classes = [IsAuthenticated]
 
 
-class PetSizeViewSet(ModelViewSet):
+class PetSizeViewSet(mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     queryset = Size.objects.all()
     serializer_class = PetSizeSerializer
 
 
-class PetSpecieViewSet(ModelViewSet):
+class PetSpecieViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                    viewsets.GenericViewSet):
     queryset = Specie.objects.all()
     serializer_class = PetSpecieSerializer
