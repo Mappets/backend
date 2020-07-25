@@ -37,13 +37,13 @@ router.register('history', PetHistoryViewSet, basename='history')
 
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('', include('django_populate.urls')),
-    path('docs/', schema_view),
+    path('api/v1/', include(router.urls)),
+    # path('api/v1/', include('django_populate.urls')),
     # path('api-token-auth/', obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('docs/', schema_view),
     # path('admin/', admin.site.urls),
 ]
 
@@ -51,7 +51,7 @@ urlpatterns = [
 # https://fueled.com/blog/supporting-multiple-languages-in-django/
 
 urlpatterns += i18n_patterns(
-    path('', include(router.urls)),
+    path('api/v1/', include(router.urls)),
     path('admin/', admin.site.urls),
     prefix_default_language=False,
 )

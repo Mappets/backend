@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import View
 from django.http.response import HttpResponse
+from django.shortcuts import render,get_object_or_404
+from django.views.generic import View
+
+
+from rest_framework import status
 from rest_framework import mixins,viewsets, generics as g
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -18,30 +21,33 @@ class PetViewSet(viewsets.ViewSet):
         queryset = Pet.objects.all()
         serializer = PetSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
+        queryset = Pet.objects.all()
+        pet = get_object_or_404(queryset, pk=pk)
+        serializer = PetSerializer(pet)
+        return Response(serializer.data)
+        
 
     def create(self, request, pk=None):
         try:
-            req = request.data
-            pet = Pet.objects.create(
-                name=req['name'],
-                age=req['age'],
-                color=req['color'],
-                gender=req['gender'],
-                breed_id=req['breed'],
-                species=req['species']
-            )
-            history = History.objects.create(
-                pet=pet,
-                address=req['address'],
-                latitude=req['latitude'],
-                longitude=req['longitude'],
-                # TODO: user_id tem que ser o id do usuario logado. Implementar
-                user_id=1
-            )
-            serializer = PetSerializer(pet)
-            return Response(serializer.data)
+            data = request.data.copy()
+            data.update({'user': request.user.id})
+            serializer = PetSerializer(data=data)
+            # import pdb ; pdb.set_trace()
+            if serializer.is_valid():
+                pet = serializer.save()
+                data.update({'pet':pet.id})
+            historySerializer = PetHistorySerializer(data=data)            
+            if historySerializer.is_valid():
+                history = historySerializer.save()
+                return Response({
+                    'message': 'Pet cadastrado com sucesso!',
+                    'pet': pet.id,
+                    'history': history.id
+                    }, status=status.HTTP_201_CREATED)
         except Exception as e:
-            pass
+            return Response({'message':e}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PetHistoryViewSet(ModelViewSet):

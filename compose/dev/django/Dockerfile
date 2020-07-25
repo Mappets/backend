@@ -25,8 +25,8 @@ RUN pip install -r /requirements.txt
 
 ADD . /django
 
-RUN addgroup -S django \
-    && adduser -S -G django django
+# RUN addgroup -S django \
+    # && adduser -S -G django django
 
 # Requirements are installed here to ensure they will be cached.
 
@@ -52,7 +52,7 @@ RUN chmod +x /start-flower
 
 
 # RUN chown -R django:django /django
-USER root
+# USER root
 
 WORKDIR /django
 

@@ -9,8 +9,7 @@ coverage==4.5.2
 django-seed==0.2.2
 
 # Debug
-ipdb==0.13.3
-ipython==7.16.1
+ipdb
 ptvsd==4.2.10 # https://github.com/microsoft/ptvsd
 django-extensions==2.1.7  # https://github.com/django-extensions/django-extensions
 
@@ -18,6 +17,3 @@ django-extensions==2.1.7  # https://github.com/django-extensions/django-extensio
 mkdocs==1.0.4
 
 django-createsuperuserwithpassword #https://pypi.org/project/django-createsuperuserwithpassword/
-
-django-populate==0.3.2
-django-tables2==2.3.1
