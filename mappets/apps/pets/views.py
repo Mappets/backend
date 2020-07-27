@@ -17,6 +17,7 @@ from .serializers import PetSerializer, PetHistorySerializer, PetBreedSerializer
 
 
 class PetViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
     def list(self, request):
         queryset = Pet.objects.all()
         serializer = PetSerializer(queryset, many=True)
@@ -34,7 +35,6 @@ class PetViewSet(viewsets.ViewSet):
             data = request.data.copy()
             data.update({'user': request.user.id})
             serializer = PetSerializer(data=data)
-            # import pdb ; pdb.set_trace()
             if serializer.is_valid():
                 pet = serializer.save()
                 data.update({'pet':pet.id})

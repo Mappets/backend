@@ -28,6 +28,13 @@ In each of these items, it will be possible to obtain more information about thi
 Because it is collaborative, anyone can photograph a street animal, climb onto the platform, classify its status.
 
 ## Getting started
+On Linux enviroment execute the command below in the project root
+
+```make up```
+
+if you had execute the application before some stuffs had changed. Then you should to execute to clear the database migrations:
+
+```docker-compose -p mappets run --rm django python manage.py reset_db```
 
 ### Contributing with code and tech skills
 

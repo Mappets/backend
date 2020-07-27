@@ -30,7 +30,6 @@ class PetSerializer(serializers.ModelSerializer):
     # def get_specie(self, pet):
     #     return pet.specie.name
     def get_history(self, pet):
-        import pdb ; pdb.set_trace()
         return pet.history.all().values()
 
 class PetHistorySerializer(serializers.ModelSerializer):
