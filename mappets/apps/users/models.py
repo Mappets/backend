@@ -9,7 +9,6 @@ from mappets.apps.organizations.models import Organization
 from .managers import CustomUserManager
 from uuid import uuid4
 
-from django.db import models
 
 class CommonInfo(models.Model):
     created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
@@ -42,6 +41,17 @@ class User(AbstractUser):
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    username = models.CharField(
+        _('username'),
+        max_length=150,
+        unique=True,
+        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        error_messages={
+            'unique': _("A user with that username already exists."),
+        },
+        blank=True,
+        null=True
+    )
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -55,3 +65,41 @@ class User(AbstractUser):
     class Meta:
         verbose_name_plural = _('Users')
         verbose_name = _('User')
+    
+    @property
+    def username(self):
+        return f"{self.id}-{timezone.now()}"
+    
+
+class Profile(CommonInfo):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    name = models.CharField(verbose_name="Name", max_length=50)
+    picture = models.ImageField(_('Profile Image'), upload_to="profile", blank=True, null=True)
+    phone = models.CharField(verbose_name="Phone", max_length=50)
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.user.email
+
+
+
+class History(CommonInfo):
+    '''
+    Representação da model history
+    '''
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    profile = models.ForeignKey(
+        Profile, verbose_name="Profile history",
+        on_delete=models.DO_NOTHING,
+        related_name='history'
+    )
+    address = models.CharField(
+        default=None, verbose_name="Address", max_length=50)
+    latitude = models.FloatField(
+        default=None, verbose_name="Latitude")
+    longitude = models.FloatField(
+        default=None, verbose_name="Longitude")
+    description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
+
+    def __str__(self):
+       return f"{self.profile.name} | {self.description[:10]}"

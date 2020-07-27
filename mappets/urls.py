@@ -10,7 +10,7 @@ from mappets.apps.pets.views import (PetViewSet, PetHistoryViewSet,
         PetBreedViewSet, PetGenderViewSet,
         PetColorViewSet, PetSizeViewSet,
         PetSpecieViewSet)
-from mappets.apps.users.views import UserViewSet
+from mappets.apps.users.views import UserViewSet, RegisterUserView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     # path('api/v1/', include('django_populate.urls')),
     # path('api-token-auth/', obtain_auth_token),
+    path('api/v1/register/', RegisterUserView.as_view(), name='register'),
     path('api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

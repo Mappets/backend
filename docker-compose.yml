@@ -1,8 +1,8 @@
 version: '3.7'
 
 volumes:
-  postgres_data:
-  postgres_data_backups:
+  .postgres_data:
+  .postgres_data_backups:
   redis_data: {}
 
 services:
@@ -12,13 +12,12 @@ services:
       dockerfile: ./compose/dev/postgres/Dockerfile
     image: mappets_postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - postgres_data_backups:/backups
+      - .postgres_data:/var/lib/postgresql/data
+      - .postgres_data_backups:/backups
     env_file:
       - ./.envs/.dev/.postgres
     ports:
       - "5433:5432"
-    # entrypoint: chmod -R 775 /var/lib/postgresql/data
   django: &django
     build:
       context: . 
@@ -39,7 +38,7 @@ services:
   proxy:
     image: nginx
     ports:
-     - "8000:8000"
+     - "8000:80"
     volumes:
       - ./compose/proxy/default.conf:/etc/nginx/conf.d/default.conf
     depends_on: 

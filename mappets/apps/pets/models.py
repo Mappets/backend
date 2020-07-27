@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from mappets.apps.users.models import CommonInfo
+
 from uuid import uuid4
 
 class Specie(models.Model):
@@ -81,7 +83,7 @@ class Size(models.Model):
 
 
 
-class Pet(models.Model):
+class Pet(CommonInfo):
     '''
     Representação da model pet
     '''
@@ -103,10 +105,11 @@ class Pet(models.Model):
         verbose_name = "Pet"
 
 
-class History(models.Model):
+class History(CommonInfo):
     '''
     Representação da model history
-    '''     
+    '''
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     pet = models.ForeignKey(
         Pet, verbose_name="Pet history",
         on_delete=models.CASCADE,

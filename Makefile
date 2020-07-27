@@ -19,7 +19,7 @@ help: ## This help.
 
 # Build the container
 build: ## Build the container release
-	docker-compose -f docker-compose.yml -p mappets build
+	docker-compose -f docker-build.yml build
 
 # Build the container
 build-nc: ## Build the container without caching
@@ -30,19 +30,16 @@ up: ## Spin up the project
 	docker-compose -p mappets up --build
 
 dev:
-	docker-compose -f docker-compose.yml -f docker-compose-dev.yml -p mappets up --build -d
-
-test:
-	docker-compose -f docker-compose.yml -p mappets run --rm django python manage.py test
+	docker-compose -f docker-compose.yml -f docker-compose-dev.yml -p mappets up --build
 
 stop: ## Stop running containers
-	docker-compose -p mappets stop
+	docker-compose stop
 
 down: ## Down running containers
-	docker-compose -p mappets down
+	docker-compose down
 
 clean: stop ## Stop and clean running containers
-	docker-compose -p mappets down -v
+	docker-compose down -v
 
 # Docker release - build, tag and push the container
 release: build publish ## Make a release by building and publishing the `latest` tagged containers to ECR

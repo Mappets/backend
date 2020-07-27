@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from uuid import uuid4
 
 class Category(models.Model):
     '''
@@ -21,6 +22,7 @@ class Organization(models.Model):
     '''
     Representação da model organization
     '''
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(verbose_name=_('Name'), max_length=50)
     description = models.CharField(verbose_name=_('Description'), max_length=255)
     email = models.CharField(verbose_name=_('Email'), max_length=50)

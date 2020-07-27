@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='History',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('address', models.CharField(default=None, max_length=50, verbose_name='Address')),
                 ('latitude', models.FloatField(default=None, verbose_name='Latitude')),
                 ('longitude', models.FloatField(default=None, verbose_name='Longitude')),
