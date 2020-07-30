@@ -52,8 +52,7 @@ THIRD_APPS = [
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_filters',
-    'rest_framework_swagger',
+    'rest_framework_filters',    
     # "django_celery_beat",
     # "crispy_forms",
     # "allauth",
@@ -65,6 +64,7 @@ THIRD_APPS = [
     # "rest_framework_swagger",
     # 'extra_views',
     'django_seed',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
@@ -168,6 +168,12 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 REST_FRAMEWORK = {
+    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
+    'DATETIME_INPUT_FORMATS': ['%Y-%m-%dT%H:%M:%S%z','%Y-%m-%dT%H:%M:%S'],
+    'DATE_INPUT_FORMATS': ['%Y-%m-%d'],
+    'DATE_FORMAT': '%Y-%m-%d',
+    #'TIME_INPUT_FORMATS': ["%H:%M", "%H:%M:%S"],
+    #'TIME_FORMAT': "%H:%M",
     'DEFAULT_PERMISSION_CLASSES': (
         # By default we set everything to admin,
         #   then open endpoints on a case-by-case basis
@@ -187,6 +193,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.DjangoFilterBackend',
+    ),
 }
 
 
@@ -234,4 +243,13 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+# DJANGO SWAGGER SETTINGS PAGE REFERENCES
+#https://drf-yasg.readthedocs.io/en/stable/settings.html
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+SWAGGER_SETTINGS = {
+    'DOC_EXPANSION': 'none',
+    'DEEP_LINKING': True,
 }

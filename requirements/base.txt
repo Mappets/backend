@@ -12,7 +12,7 @@ djangorestframework-filters==0.11.1
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==4.4.0
 django-environ==0.4.5  # https://github.com/joke2k/django-environ
-django-rest-swagger==2.2.0
+drf-yasg==1.17.1 #https://drf-yasg.readthedocs.io/en/stable/index.html
 Markdown==3.1.1
 docopt==0.6.2
 idna==2.9
