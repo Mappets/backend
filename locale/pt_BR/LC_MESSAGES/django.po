@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-05 19:00+0000\n"
+"POT-Creation-Date: 2020-07-30 03:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,86 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: mappets/apps/organizations/models.py:9
+#: mappets/apps/organizations/models.py:10
 msgid "Key"
 msgstr ""
 
-#: mappets/apps/organizations/models.py:10
-#: mappets/apps/organizations/models.py:25 mappets/apps/pets/models.py:10
-#: mappets/apps/pets/models.py:25 mappets/apps/pets/models.py:41
-#: mappets/apps/pets/models.py:56 mappets/apps/pets/models.py:71
+#: mappets/apps/organizations/models.py:11
+#: mappets/apps/organizations/models.py:27 mappets/apps/pets/models.py:13
+#: mappets/apps/pets/models.py:28 mappets/apps/pets/models.py:44
+#: mappets/apps/pets/models.py:60 mappets/apps/pets/models.py:75
+#: mappets/apps/pets/models.py:127 mappets/apps/users/models.py:102
 msgid "Description"
 msgstr "Descrição"
 
-#: mappets/apps/organizations/models.py:16
+#: mappets/apps/organizations/models.py:17
 msgid "Categories"
 msgstr "Categorias"
 
-#: mappets/apps/organizations/models.py:17
+#: mappets/apps/organizations/models.py:18
 msgid "Category"
 msgstr "Categoria"
 
-#: mappets/apps/organizations/models.py:24 mappets/apps/pets/models.py:9
-#: mappets/apps/pets/models.py:24 mappets/apps/pets/models.py:40
-#: mappets/apps/pets/models.py:55 mappets/apps/pets/models.py:70
+#: mappets/apps/organizations/models.py:26 mappets/apps/pets/models.py:12
+#: mappets/apps/pets/models.py:27 mappets/apps/pets/models.py:43
+#: mappets/apps/pets/models.py:59 mappets/apps/pets/models.py:74
 msgid "Name"
 msgstr "Nome"
 
-#: mappets/apps/organizations/models.py:26
+#: mappets/apps/organizations/models.py:28
 msgid "Email"
 msgstr ""
 
-#: mappets/apps/organizations/models.py:27
+#: mappets/apps/organizations/models.py:29
 msgid "Phone"
 msgstr "Telefone"
 
-#: mappets/apps/organizations/models.py:34
+#: mappets/apps/organizations/models.py:36
 msgid "Organizations"
 msgstr "Organizações"
 
-#: mappets/apps/organizations/models.py:35
+#: mappets/apps/organizations/models.py:37
 msgid "Organization"
 msgstr "Organização"
 
-#: mappets/apps/pets/models.py:16
-msgid "Breeds"
-msgstr "Raças"
-
-#: mappets/apps/pets/models.py:17
-msgid "Breed"
-msgstr "Raça"
-
-#: mappets/apps/pets/models.py:31
-msgid "Genders"
-msgstr "Gêneros"
-
-#: mappets/apps/pets/models.py:32
-msgid "Gender"
-msgstr "Genero"
-
-#: mappets/apps/pets/models.py:47
-msgid "Colors"
-msgstr "Cores"
-
-#: mappets/apps/pets/models.py:48
-msgid "Color"
-msgstr "Cor"
-
-#: mappets/apps/pets/models.py:62
-msgid "Sizes"
-msgstr "Tamanhos"
-
-#: mappets/apps/pets/models.py:63
-msgid "Size"
-msgstr "Tamanho"
-
-#: mappets/apps/pets/models.py:77
+#: mappets/apps/pets/models.py:19
 msgid "Species"
 msgstr "Espécies"
 
-#: mappets/apps/pets/models.py:78
+#: mappets/apps/pets/models.py:20
 msgid "Specie"
 msgstr "Espécie"
+
+#: mappets/apps/pets/models.py:35
+msgid "Breeds"
+msgstr "Raças"
+
+#: mappets/apps/pets/models.py:36
+msgid "Breed"
+msgstr "Raça"
+
+#: mappets/apps/pets/models.py:50
+msgid "Genders"
+msgstr "Gêneros"
+
+#: mappets/apps/pets/models.py:51
+msgid "Gender"
+msgstr "Genero"
+
+#: mappets/apps/pets/models.py:66
+msgid "Colors"
+msgstr "Cores"
+
+#: mappets/apps/pets/models.py:67
+msgid "Color"
+msgstr "Cor"
+
+#: mappets/apps/pets/models.py:81
+msgid "Sizes"
+msgstr "Tamanhos"
+
+#: mappets/apps/pets/models.py:82
+msgid "Size"
+msgstr "Tamanho"
 
 #: mappets/apps/users/managers.py:15
 msgid "The Email must be set"
@@ -111,18 +112,50 @@ msgstr "Superusuário deve ter is_staff=True."
 msgid "Superuser must have is_superuser=True."
 msgstr "Superusuário deve ter is_superuser=True."
 
-#: mappets/apps/users/models.py:35
+#: mappets/apps/users/models.py:14
+msgid "Created at"
+msgstr ""
+
+#: mappets/apps/users/models.py:15
+msgid "Updated At"
+msgstr ""
+
+#: mappets/apps/users/models.py:16
+msgid "Deleted At"
+msgstr ""
+
+#: mappets/apps/users/models.py:45
+msgid "username"
+msgstr ""
+
+#: mappets/apps/users/models.py:48
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: mappets/apps/users/models.py:50
+msgid "A user with that username already exists."
+msgstr ""
+
+#: mappets/apps/users/models.py:66
 msgid "Users"
 msgstr "Usuários"
 
-#: mappets/apps/users/models.py:36
+#: mappets/apps/users/models.py:67
 msgid "User"
 msgstr "Usário"
+
+#: mappets/apps/users/models.py:77
+msgid "Profile Image"
+msgstr ""
+
+#: mappets/apps/users/views.py:43
+msgid "Registration Successful"
+msgstr "Sucesso ao registrar"
+
+#: mappets/settings.py:160
+msgid "English"
+msgstr "Inglês"
 
 #: mappets/settings.py:161
 msgid "Brazilian Portuguese"
 msgstr "Português Brasileiro"
-
-#: mappets/settings.py:162
-msgid "English"
-msgstr "Inglês"

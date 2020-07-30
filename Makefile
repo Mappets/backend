@@ -29,7 +29,7 @@ build-nc: ## Build the container without caching
 up: ## Spin up the project
 	docker-compose -p mappets up --build
 
-dev:
+dev: ## Run application as Dev Enviroment
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml -p mappets up --build
 
 stop: ## Stop running containers
@@ -40,6 +40,12 @@ down: ## Down running containers
 
 clean: stop ## Stop and clean running containers
 	docker-compose down -v
+
+makemessages: ## Make text massages with differents languages index
+	docker-compose -p mappets run --rm django python manage.py makemessages
+
+compilemessages: ## Compile the messages files made by makemessages command
+	docker-compose -p mappets run --rm django python manage.py compilemessages
 
 # Docker release - build, tag and push the container
 release: build publish ## Make a release by building and publishing the `latest` tagged containers to ECR
@@ -53,5 +59,5 @@ tag: ## Generate container `{version}` tag
 	@echo 'create tag latest'
 	docker tag $(APP_NAME) $(DOCKER_REPO)/$(APP_NAME):latest
 
-run_prod:
+run_prod: ## Get up the services of a production enviroment
 	docker-compose -f docker-prod.yml up --build -d
