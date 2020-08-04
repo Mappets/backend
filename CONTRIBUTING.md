@@ -37,7 +37,7 @@ Then browse from [`localhost:8000`](http://localhost:8000).
 
 ## The basics of contributing
 
-A lot of discussions about ideas take place in the [Issues](https://github.com/Mappets/website/issues) section.
+A lot of discussions about ideas take place in the [Issues](https://github.com/Mappets/backend/issues) section.
 
 ### The Git basics
 
