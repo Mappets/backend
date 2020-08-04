@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=mappets
+POSTGRES_USER=mappets
+POSTGRES_PASSWORD=808a2721c5f3cbc1fc5709036f724e9e12bad97904faaec51dc00086eec15760

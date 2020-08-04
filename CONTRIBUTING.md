@@ -1,40 +1,39 @@
-# Mappets
+<!-- PROJECT LOGO -->
+<p align="center">
+  <a href="https://github.com/Mappets">
+    <img src="https://raw.githubusercontent.com/Mappets/assets/master/brand/brand-colored.png" width="350px" alt="Mappets brand">
+  </a>
 
-Contributing Guide
+  <h3 align="center">We care a lot about animals.</h3>
+</p>
+
+---
+
+## Contributing Guide
 
 ## Before you start
 
-Please, make sure you have read the project description. If don't, read rigth [clicking here]().
+Please, make sure you have read the project description. If don't, read rigth [clicking here](https://github.com/Mappets/backend/blob/master/README.md).
 
 ## Installing
 
 As our stack is not a simple one we opted for standardizing our instructions do [Docker Compose](https://docs.docker.com/compose/install/), which will help you spin up every service in a few commands.
-
-Everything is expected to work with:
-
-```console
-$ docker-compose up
-```
-
-**Note:** `docker-compose up` is just a health check to assure all dependencies are succesfully installed and the project is running well. To run properly Mappets there are a few more steps (migrations, for example), which are the ones below.
 
 ### Running
 
 Example to run only the back-end:
 
 ```console
-$ docker-compose run —rm web pip install -r requirements.txt
-$ docker-compose app python manage.py
-$ docker-compose app python manage.py createsuperuser
+make up
 ```
 
-The spin up the web server:
+if you had execute the application before some stuffs had changed. Then you should to execute to clear the database migrations:
 
 ```console
-$ docker-compose up -d
+docker-compose -p mappets run --rm django python manage.py reset_db
 ```
 
-Then browse from [`localhost`](http://localhost).
+Then browse from [`localhost:8000`](http://localhost:8000).
 
 ## The basics of contributing
 

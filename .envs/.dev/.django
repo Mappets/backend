@@ -1,0 +1,11 @@
+# General
+# ------------------------------------------------------------------------------
+DJANGO_DEBUG=True
+SECRET_KEY=dev
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=mappets
+CELERY_FLOWER_PASSWORD=mappets

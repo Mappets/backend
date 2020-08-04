@@ -10,8 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+
 import os
 from decouple import config
+from django.utils.translation import ugettext_lazy as _
+
+import environ
+env = environ.Env()
 
 from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -42,17 +47,30 @@ INSTALLED_APPS = [
 ]
 
 THIRD_APPS = [
+    'django_createsuperuserwithpassword',
     'corsheaders',
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_filters',
+    'rest_framework_filters',    
+    # "django_celery_beat",
+    # "crispy_forms",
+    # "allauth",
+    # "allauth.account",
+    # "allauth.socialaccount",
+    "django_filters",
+    # "django_redis",
+    # "constance",
+    # "rest_framework_swagger",
+    # 'extra_views',
+    'django_seed',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
-    'pets',
-    'users',
-    'organizations',
+    'mappets.apps.users',
+    'mappets.apps.pets',
+    'mappets.apps.organizations',
 ]
 
 INSTALLED_APPS += THIRD_APPS + LOCAL_APPS
@@ -61,16 +79,16 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mappets.urls'
-
+AUTH_USER_MODEL = 'users.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -93,20 +111,7 @@ WSGI_APPLICATION = 'mappets.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': config('DB_NAME'),
-    #     'USER': config('DB_USER'),
-    #     'PASSWORD': config('DB_PASSWORD'),
-    #     'HOST': config('DB_HOST'),
-    #     'PORT': config('DB_PORT', default='5432'),
-    # },
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": env.db("DATABASE_URL", default='')}
 
 
 # Password validation
@@ -133,6 +138,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
+FAKER_LOCALE = LANGUAGE_CODE
+
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
@@ -149,10 +156,10 @@ STATIC_URL = '/static/'
 
 LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
 
-# LANGUAGES = [
-#     ('de', _('German')),
-#     ('en', _('English')),
-# ]
+LANGUAGES = [
+    ('en', _('English')),
+    ('pt-br', _('Brazilian Portuguese')),
+]
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 CORS_ORIGIN_WHITELIST = (
@@ -161,6 +168,12 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 REST_FRAMEWORK = {
+    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
+    'DATETIME_INPUT_FORMATS': ['%Y-%m-%dT%H:%M:%S%z','%Y-%m-%dT%H:%M:%S'],
+    'DATE_INPUT_FORMATS': ['%Y-%m-%d'],
+    'DATE_FORMAT': '%Y-%m-%d',
+    #'TIME_INPUT_FORMATS': ["%H:%M", "%H:%M:%S"],
+    #'TIME_FORMAT': "%H:%M",
     'DEFAULT_PERMISSION_CLASSES': (
         # By default we set everything to admin,
         #   then open endpoints on a case-by-case basis
@@ -172,6 +185,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.TemplateHTMLRenderer'
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
@@ -179,6 +193,9 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.DjangoFilterBackend',
+    ),
 }
 
 
@@ -186,4 +203,53 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': timedelta(hours=1),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.live.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ivoryit@hotmail.com'
+EMAIL_HOST_PASSWORD = 'IvoryEmail123@'
+EMAIL_FEEDBACK = 'julio.silva@ivoryit.com.br'
+
+#DJANGO REST SWAGGER
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+
+# DJANGO-REST-FRAMEWORK-SIMPLEJWT
+# https://github.com/davesque/django-rest-framework-simplejwt
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+# DJANGO SWAGGER SETTINGS PAGE REFERENCES
+#https://drf-yasg.readthedocs.io/en/stable/settings.html
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+SWAGGER_SETTINGS = {
+    'DOC_EXPANSION': 'none',
+    'DEEP_LINKING': True,
 }

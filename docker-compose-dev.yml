@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+  django: &django
+    build:
+      context: . 
+      dockerfile: ./compose/dev/django/Dockerfile
+      labels:
+        - "django"
+    volumes:
+      - ".:/django"
+    env_file:
+      - ./.envs/.dev/.django
+      - ./.envs/.dev/.postgres
+      - ./.envs/.dev/.redis
+    command: /start
+    depends_on: 
+      - postgres
+    stdin_open: true
+    tty: true
+  mailhog:
+      image: mailhog/mailhog:v1.0.0
+      ports:
+        - "8025:8025"
+      depends_on:
+        - postgres
+  celeryworker:
+    <<: *django
+    image: mappets_celeryworker
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+    ports: []
+    working_dir: /
+    command: /start-celeryworker
+  
+  celerybeat:
+    <<: *django
+    image: mappets_celerybeat
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+    ports: []
+    working_dir: /
+    command: /start-celerybeat
+  
+  flower:
+    <<: *django
+    image: mappets_flower
+    ports:
+      - "5555:5555"
+    working_dir: /
+    command: /start-flower

@@ -1,24 +1,55 @@
 version: '3.7'
 
+volumes:
+  .postgres_data:
+  .postgres_data_backups:
+  redis_data: {}
+
 services:
-  web:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/dev/postgres/Dockerfile
+    image: mappets_postgres
+    volumes:
+      - .postgres_data:/var/lib/postgresql/data
+      - .postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.dev/.postgres
+    ports:
+      - "5433:5432"
+  django: &django
     build:
       context: . 
-      dockerfile: ./compose/django/Dockerfile
+      dockerfile: ./compose/dev/django/Dockerfile
       labels:
         - "django"
-    command: >
-      sh -c "
-      python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ".:/web"
+      - ".:/django"
+    env_file:
+      - ./.envs/.dev/.django
+      - ./.envs/.dev/.postgres
+      - ./.envs/.dev/.redis
+    command: /start
+    depends_on: 
+      - postgres
+    stdin_open: true
+    tty: true
   proxy:
     image: nginx
     ports:
-     - "80:80"
+     - "8000:80"
     volumes:
       - ./compose/proxy/default.conf:/etc/nginx/conf.d/default.conf
     depends_on: 
-      - web
-    
+      - django
+  redis:
+    image: 'redis:5.0-alpine'
+    volumes:
+      - 'redis_data:/data'
+    env_file:
+      - ./.envs/.dev/.redis
+    ports:
+      - "6380:6379"
+    depends_on:
+      - postgres
