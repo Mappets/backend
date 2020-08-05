@@ -19,6 +19,12 @@ Please, make sure you have read the project description. If don't, read rigth [c
 
 As our stack is not a simple one we opted for standardizing our instructions do [Docker Compose](https://docs.docker.com/compose/install/), which will help you spin up every service in a few commands.
 
+if you don't have the `make` command installed, you have to run it to install:
+
+```console
+sudo apt install make
+```
+
 ### Running
 
 Example to run only the back-end:
