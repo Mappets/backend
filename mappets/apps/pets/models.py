@@ -1,3 +1,4 @@
+from django.contrib.gis.db import models as models_gis
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -117,9 +118,9 @@ class History(CommonInfo):
     )
     address = models.CharField(
         default=None, verbose_name="Address", max_length=50)
-    latitude = models.FloatField(
+    latitude = models_gis.PointField(
         default=None, verbose_name="Latitude")
-    longitude = models.FloatField(
+    longitude = models_gis.PointField(
         default=None, verbose_name="Longitude")
     user = models.ForeignKey(
         "users.User", default=None, verbose_name="User",
@@ -128,3 +129,15 @@ class History(CommonInfo):
 
     def __str__(self):
        return f"{self.pet.name} | {self.description[:10]}"
+
+class Photo(CommonInfo):
+    # id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    pet = models.ForeignKey(
+        Pet, verbose_name="Pet Photos",
+        on_delete=models.CASCADE,
+        related_name='photos'
+    )
+    photo = models.ImageField(verbose_name="Photo", blank=False, null=False)
+
+    def __str__(self):
+        return self.photo

@@ -4,14 +4,36 @@ from .models import Profile
 
 UserModel = get_user_model()
 
+class ProfileSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer()
+    full_name = serializers.ReadOnlyField()
+    created_at = serializers.ReadOnlyField()
+    updated_at = serializers.ReadOnlyField()
     class Meta:
         model = UserModel
-        fields = ('__all__')
-
-from rest_framework import serializers
-
-
+        fields = (
+                'id',
+                'name',
+                'email',
+                'phone',
+                'organizations',
+                'is_staff',
+                'is_superuser',
+                'is_active',
+                'date_joined',
+                'full_name',
+                'profile',
+                'first_name',
+                'last_name',
+                'created_at',
+                'updated_at'
+                )
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -30,11 +52,5 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ( "id", "name", "email", "password")
+        fields = ( "id", "name", "email", "password",)
 
-class ProfileSerializer(serializers.ModelSerializer):
-
-
-    class Meta:
-        model = Profile
-        exclude = ('created_at','updated_at', 'deleted_at', 'deleted')

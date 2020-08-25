@@ -1,9 +1,9 @@
-from django.urls import path
-from mappets.apps.pets.views import PetViewSet, PetHistoryViewSet
-from mappets.urls import router
+from django.urls import path, include
+from rest_framework import routers
 
-# Pets API routes
-router.register('pets', PetViewSet, basename='pets')
-router.register('pets/history', PetHistoryViewSet, basename='history')
+from mappets.apps.pets.views import PhotoUploadView
 
-urlpatterns = router.urls
+
+urlpatterns = [
+    path('photos/', PhotoUploadView.as_view()),
+]

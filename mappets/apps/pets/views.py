@@ -5,24 +5,28 @@ from django.views.generic import View
 
 from rest_framework import status
 from rest_framework import mixins,viewsets, generics as g
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
+from rest_framework.parsers import FileUploadParser
 
 
 
-from .models import Pet, History, Breed, Gender, Color, Size, Specie
+from .models import Pet, History, Breed, Gender, Color, Size, Specie, Photo
 
-from .serializers import PetSerializer, PetHistorySerializer, PetBreedSerializer, PetGenderSerializer, PetColorSerializer, PetSizeSerializer, PetSpecieSerializer
+from .serializers import (
+    PetSerializer, PetHistorySerializer, PetBreedSerializer,
+    PetGenderSerializer, PetColorSerializer, PetSizeSerializer,
+    PetSpecieSerializer, PhotoSerializer
+    )
 
 
-class PetViewSet(viewsets.ViewSet):
+class PetViewSet(ModelViewSet):
+    serializer_class = PetSerializer
+    queryset = Pet.objects.all()
     permission_classes = [IsAuthenticated]
-    def list(self, request):
-        queryset = Pet.objects.all()
-        serializer = PetSerializer(queryset, many=True)
-        return Response(serializer.data)
-    
+
     def retrieve(self, request, pk=None):
         queryset = Pet.objects.all()
         pet = get_object_or_404(queryset, pk=pk)
@@ -111,3 +115,15 @@ class PetSpecieViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
                     viewsets.GenericViewSet):
     queryset = Specie.objects.all()
     serializer_class = PetSpecieSerializer
+
+class PhotoUploadView(g.ListCreateAPIView):
+    parser_class = (FileUploadParser,)
+    permission_classes = [AllowAny,]
+
+    def create(self, request, *args, **kwargs):
+        file_serializer = PhotoSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

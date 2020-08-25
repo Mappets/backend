@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 
@@ -13,7 +15,7 @@ from mappets.apps.pets.views import (PetViewSet, PetHistoryViewSet,
         PetBreedViewSet, PetGenderViewSet,
         PetColorViewSet, PetSizeViewSet,
         PetSpecieViewSet)
-from mappets.apps.users.views import UserViewSet, RegisterUserView
+from mappets.apps.users.views import UserViewSet, RegisterUserView, MyTokenObtainPairView
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -52,18 +54,18 @@ router.register('history', PetHistoryViewSet, basename='history')
 
 
 urlpatterns = [
+    path('api/v1/pets/', include('mappets.apps.pets.urls')),
     path('api/v1/', include(router.urls)),
-    # path('api/v1/', include('django_populate.urls')),
     # path('api-token-auth/', obtain_auth_token),
     path('api/v1/register/', RegisterUserView.as_view(), name='register'),
     path('api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r'^docs(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     # path('admin/', admin.site.urls),
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # TODO: Usar i18n_patterns (já importado) para usar multilanguage na API DRF
 # https://fueled.com/blog/supporting-multiple-languages-in-django/

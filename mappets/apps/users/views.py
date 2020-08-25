@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.response import Response
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from django.contrib.auth import get_user_model
 
@@ -16,6 +18,8 @@ from .serializers import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+    model = User
 
 
 
@@ -46,3 +50,20 @@ class RegisterUserView(generics.CreateAPIView):
         
         headers = self.get_success_headers(serializer.data)
         return Response(res, status=status.HTTP_201_CREATED, headers=headers)
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+
+
+        data['user'] = UserSerializer(self.user, context=self.context).data
+        # data['profile'] = self.user.profile.id
+        # data['groups'] = self.user.groups.values_list('name', flat=True)
+        return data
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

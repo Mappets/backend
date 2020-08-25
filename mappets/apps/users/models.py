@@ -70,6 +70,10 @@ class User(AbstractUser):
     def username(self):
         return f"{self.id}-{timezone.now()}"
     
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+    
 
 class Profile(CommonInfo):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)

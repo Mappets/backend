@@ -22,6 +22,8 @@ from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 ]
 
 THIRD_APPS = [
@@ -209,9 +212,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.live.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'ivoryit@hotmail.com'
-EMAIL_HOST_PASSWORD = 'IvoryEmail123@'
-EMAIL_FEEDBACK = 'julio.silva@ivoryit.com.br'
+EMAIL_HOST_USER = 'contato@mappets.app'
+EMAIL_HOST_PASSWORD = 'contato@mappets.app'
 
 #DJANGO REST SWAGGER
 LOGIN_URL = 'rest_framework:login'
@@ -244,6 +246,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+APPEND_SLASH = True
 
 # DJANGO SWAGGER SETTINGS PAGE REFERENCES
 #https://drf-yasg.readthedocs.io/en/stable/settings.html
