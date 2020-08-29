@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models as models_gis
+# from django.contrib.gis.db import models as models_gis
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -6,12 +6,14 @@ from mappets.apps.users.models import CommonInfo
 
 from uuid import uuid4
 
+
 class Specie(models.Model):
     '''
     Representação da model specie
-    '''     
+    '''
     name = models.CharField(verbose_name=_('Name'), max_length=50)
-    description = models.CharField(verbose_name=_('Description'), max_length=255)
+    description = models.CharField(
+        verbose_name=_('Description'), max_length=255)
 
     def __str__(self):
         return self.name
@@ -20,14 +22,17 @@ class Specie(models.Model):
         verbose_name_plural = _('Species')
         verbose_name = _('Specie')
 
+
 class Breed(models.Model):
     '''
     Representação da model breed
     '''
-    
+
     name = models.CharField(verbose_name=_('Name'), max_length=50)
-    description = models.CharField(verbose_name=_('Description'), max_length=255)
-    specie = models.ForeignKey(Specie, on_delete=models.SET_NULL, null=True, related_name=('breeds'))
+    description = models.CharField(
+        verbose_name=_('Description'), max_length=255)
+    specie = models.ForeignKey(
+        Specie, on_delete=models.SET_NULL, null=True, related_name=('breeds'))
 
     def __str__(self):
         return self.name
@@ -40,9 +45,10 @@ class Breed(models.Model):
 class Gender(models.Model):
     '''
     Representação da model gender
-    '''     
+    '''
     name = models.CharField(verbose_name=_('Name'), max_length=50)
-    description = models.CharField(verbose_name=_('Description'), max_length=255)
+    description = models.CharField(
+        verbose_name=_('Description'), max_length=255)
 
     def __str__(self):
         return self.name
@@ -58,7 +64,8 @@ class Color(models.Model):
     '''
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(verbose_name=_('Name'), max_length=50)
-    description = models.CharField(verbose_name=_('Description'), max_length=255)
+    description = models.CharField(
+        verbose_name=_('Description'), max_length=255)
 
     def __str__(self):
         return self.name
@@ -71,9 +78,10 @@ class Color(models.Model):
 class Size(models.Model):
     '''
     Representação da model size
-    '''     
+    '''
     name = models.CharField(verbose_name=_('Name'), max_length=50)
-    description = models.CharField(verbose_name=_('Description'), max_length=255)
+    description = models.CharField(
+        verbose_name=_('Description'), max_length=255)
 
     def __str__(self):
         return self.name
@@ -83,23 +91,26 @@ class Size(models.Model):
         verbose_name = _('Size')
 
 
-
 class Pet(CommonInfo):
     '''
     Representação da model pet
     '''
-    id = models.UUIDField(primary_key=True, default=uuid4, editable=False) 
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(verbose_name='Name', max_length=50, null=False)
-    description = models.CharField(verbose_name='Description', null=True, max_length=255)
+    description = models.CharField(
+        verbose_name='Description', null=True, max_length=255)
     age = models.IntegerField(verbose_name='Age', null=True)
-    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, related_name=('pets'))
-    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, related_name=('pets'))
-    size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True, related_name=('pets'))
-    specie = models.ForeignKey(Specie, on_delete=models.SET_NULL, null=True, related_name=('pets'))
-    
+    color = models.ForeignKey(
+        Color, on_delete=models.SET_NULL, null=True, related_name=('pets'))
+    gender = models.ForeignKey(
+        Gender, on_delete=models.SET_NULL, null=True, related_name=('pets'))
+    size = models.ForeignKey(
+        Size, on_delete=models.SET_NULL, null=True, related_name=('pets'))
+    specie = models.ForeignKey(
+        Specie, on_delete=models.SET_NULL, null=True, related_name=('pets'))
 
     def __str__(self):
-       return self.name
+        return self.name
 
     class Meta:
         verbose_name_plural = "Pets"
@@ -118,17 +129,19 @@ class History(CommonInfo):
     )
     address = models.CharField(
         default=None, verbose_name="Address", max_length=50)
-    latitude = models_gis.PointField(
+    latitude = models.FloatField(
         default=None, verbose_name="Latitude")
-    longitude = models_gis.PointField(
+    longitude = models.FloatField(
         default=None, verbose_name="Longitude")
     user = models.ForeignKey(
         "users.User", default=None, verbose_name="User",
         on_delete=models.CASCADE)
-    description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
+    description = models.CharField(verbose_name=_(
+        'Description'), max_length=255, null=True, blank=True)
 
     def __str__(self):
-       return f"{self.pet.name} | {self.description[:10]}"
+        return f"{self.pet.name} | {self.description[:10]}"
+
 
 class Photo(CommonInfo):
     # id = models.UUIDField(primary_key=True, default=uuid4, editable=False)

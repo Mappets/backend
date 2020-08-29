@@ -2,35 +2,32 @@ from rest_framework import serializers
 from .models import Pet, History, Breed, Gender, Color, Size, Specie, Photo
 
 
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = "__all__"
+        # depth = 1
+
+
 class PetSerializer(serializers.ModelSerializer):
-    # color = serializers.SerializerMethodField()
-    # gender = serializers.SerializerMethodField()
-    # size = serializers.SerializerMethodField()
-    # specie = serializers.SerializerMethodField()
+    # photos = PhotoSerializer(source='photos', many=True)
     history = serializers.SerializerMethodField()
+    album = serializers.SerializerMethodField()
 
     class Meta:
         model = Pet
         fields = ('__all__')
-    
-    # def create(self, validated_data):
-    #     import pdb ; pdb.set_trace()
-    #     print('teste')
 
-    # def get_color(self, pet):
-    #     print(pet.id)
-    #     return pet.color.name
-    
-    # def get_gender(self, pet):
-    #     return pet.gender.name
-    
-    # def get_size(self, pet):
-    #     return pet.size.name
-    
-    # def get_specie(self, pet):
-    #     return pet.specie.name
+    def get_album(self, pet):
+        photos = list(pet.photos.filter(deleted=False))
+        data = PhotoSerializer(data=photos, context=self.context, many=True)
+        if not data.is_valid():
+            return data.data
+        return {}
+
     def get_history(self, pet):
-        return pet.history.all().values()
+        return pet.history.filter(deleted=False).values()
+
 
 class PetHistorySerializer(serializers.ModelSerializer):
     Pet = PetSerializer(many=False, read_only=True)
@@ -66,11 +63,7 @@ class PetSizeSerializer(serializers.ModelSerializer):
 
 class PetSpecieSerializer(serializers.ModelSerializer):
     breeds = PetBreedSerializer(many=True, read_only=True)
+
     class Meta:
         model = Specie
         fields = ('__all__')
-
-class PhotoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Photo
-        fields = "__all__"

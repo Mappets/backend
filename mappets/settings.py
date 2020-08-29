@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 
+from datetime import timedelta
 import os
 from decouple import config
 from django.utils.translation import ugettext_lazy as _
@@ -18,7 +19,6 @@ from django.utils.translation import ugettext_lazy as _
 import environ
 env = environ.Env()
 
-from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
+    # 'django.contrib.gis',
 ]
 
 THIRD_APPS = [
@@ -55,7 +55,7 @@ THIRD_APPS = [
     'django_extensions',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_filters',    
+    'rest_framework_filters',
     # "django_celery_beat",
     # "crispy_forms",
     # "allauth",
@@ -95,7 +95,7 @@ AUTH_USER_MODEL = 'users.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -157,7 +157,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
 
 LANGUAGES = [
     ('en', _('English')),
@@ -166,17 +166,17 @@ LANGUAGES = [
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 CORS_ORIGIN_WHITELIST = (
-       'http://localhost:8080',
-       'http://localhost:8081',
+    'http://localhost:8080',
+    'http://localhost:8081',
 )
 
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S',
-    'DATETIME_INPUT_FORMATS': ['%Y-%m-%dT%H:%M:%S%z','%Y-%m-%dT%H:%M:%S'],
+    'DATETIME_INPUT_FORMATS': ['%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%dT%H:%M:%S'],
     'DATE_INPUT_FORMATS': ['%Y-%m-%d'],
     'DATE_FORMAT': '%Y-%m-%d',
-    #'TIME_INPUT_FORMATS': ["%H:%M", "%H:%M:%S"],
-    #'TIME_FORMAT': "%H:%M",
+    # 'TIME_INPUT_FORMATS': ["%H:%M", "%H:%M:%S"],
+    # 'TIME_FORMAT': "%H:%M",
     'DEFAULT_PERMISSION_CLASSES': (
         # By default we set everything to admin,
         #   then open endpoints on a case-by-case basis
@@ -215,7 +215,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'contato@mappets.app'
 EMAIL_HOST_PASSWORD = 'contato@mappets.app'
 
-#DJANGO REST SWAGGER
+# DJANGO REST SWAGGER
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 
@@ -249,7 +249,7 @@ SIMPLE_JWT = {
 APPEND_SLASH = True
 
 # DJANGO SWAGGER SETTINGS PAGE REFERENCES
-#https://drf-yasg.readthedocs.io/en/stable/settings.html
+# https://drf-yasg.readthedocs.io/en/stable/settings.html
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 SWAGGER_SETTINGS = {

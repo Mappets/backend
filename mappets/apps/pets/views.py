@@ -1,16 +1,15 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 
 
 from rest_framework import status
-from rest_framework import mixins,viewsets, generics as g
+from rest_framework import mixins, viewsets, generics as g
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-
 
 
 from .models import Pet, History, Breed, Gender, Color, Size, Specie, Photo
@@ -19,7 +18,7 @@ from .serializers import (
     PetSerializer, PetHistorySerializer, PetBreedSerializer,
     PetGenderSerializer, PetColorSerializer, PetSizeSerializer,
     PetSpecieSerializer, PhotoSerializer
-    )
+)
 
 
 class PetViewSet(ModelViewSet):
@@ -27,12 +26,10 @@ class PetViewSet(ModelViewSet):
     queryset = Pet.objects.all()
     permission_classes = [IsAuthenticated]
 
-    def retrieve(self, request, pk=None):
-        queryset = Pet.objects.all()
-        pet = get_object_or_404(queryset, pk=pk)
-        serializer = PetSerializer(pet)
-        return Response(serializer.data)
-        
+    def get_serializer_context(self):
+        context = super(PetViewSet, self).get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
     def create(self, request, pk=None):
         try:
@@ -41,17 +38,20 @@ class PetViewSet(ModelViewSet):
             serializer = PetSerializer(data=data)
             if serializer.is_valid():
                 pet = serializer.save()
-                data.update({'pet':pet.id})
-            historySerializer = PetHistorySerializer(data=data)            
+                data.update({'pet': pet.id})
+            historySerializer = PetHistorySerializer(data=data)
             if historySerializer.is_valid():
                 history = historySerializer.save()
                 return Response({
                     'message': 'Pet cadastrado com sucesso!',
                     'pet': pet.id,
                     'history': history.id
-                    }, status=status.HTTP_201_CREATED)
+                }, status=status.HTTP_201_CREATED)
+            return Response({
+                'message': 'Erro ao cadastrar Pet!'
+            }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'message':e}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': e}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PetHistoryViewSet(ModelViewSet):
@@ -77,7 +77,7 @@ class PetHistoryViewSet(ModelViewSet):
 
 
 class PetBreedViewSet(mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+                      viewsets.GenericViewSet):
     """
     Breed GET List
     ---
@@ -91,34 +91,33 @@ class PetBreedViewSet(mixins.ListModelMixin,
 
 
 class PetGenderViewSet(mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+                       viewsets.GenericViewSet):
     queryset = Gender.objects.all()
     serializer_class = PetGenderSerializer
 
 
-
-
 class PetColorViewSet(mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+                      viewsets.GenericViewSet):
     queryset = Color.objects.all()
     serializer_class = PetColorSerializer
     permission_classes = [IsAuthenticated]
 
 
 class PetSizeViewSet(mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+                     viewsets.GenericViewSet):
     queryset = Size.objects.all()
     serializer_class = PetSizeSerializer
 
 
 class PetSpecieViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
-                    viewsets.GenericViewSet):
+                       viewsets.GenericViewSet):
     queryset = Specie.objects.all()
     serializer_class = PetSpecieSerializer
 
+
 class PhotoUploadView(g.ListCreateAPIView):
     parser_class = (FileUploadParser,)
-    permission_classes = [AllowAny,]
+    permission_classes = [AllowAny, ]
 
     def create(self, request, *args, **kwargs):
         file_serializer = PhotoSerializer(data=request.data)
