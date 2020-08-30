@@ -117,6 +117,7 @@ class PetSpecieViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 
 class PhotoUploadView(g.ListCreateAPIView):
     parser_class = (FileUploadParser,)
+    serializer_class = PhotoSerializer
     permission_classes = [AllowAny, ]
 
     def create(self, request, *args, **kwargs):
