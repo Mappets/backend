@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 volumes:
   .postgres_data:
@@ -20,7 +20,7 @@ services:
       - "5433:5432"
   django: &django
     build:
-      context: . 
+      context: .
       dockerfile: ./compose/dev/django/Dockerfile
       labels:
         - "django"
@@ -31,22 +31,22 @@ services:
       - ./.envs/.dev/.postgres
       - ./.envs/.dev/.redis
     command: /start
-    depends_on: 
+    depends_on:
       - postgres
     stdin_open: true
     tty: true
   proxy:
     image: nginx
     ports:
-     - "8000:80"
+      - "8000:80"
     volumes:
       - ./compose/proxy/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on: 
+    depends_on:
       - django
   redis:
-    image: 'redis:5.0-alpine'
+    image: "redis:5.0-alpine"
     volumes:
-      - 'redis_data:/data'
+      - "redis_data:/data"
     env_file:
       - ./.envs/.dev/.redis
     ports:

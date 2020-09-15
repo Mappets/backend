@@ -96,7 +96,8 @@ class Pet(CommonInfo):
     Representação da model pet
     '''
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    name = models.CharField(verbose_name='Name', max_length=50, null=False)
+    name = models.CharField(verbose_name='Name',
+                            max_length=50, null=True, blank=True)
     description = models.CharField(
         verbose_name='Description', null=True, max_length=255)
     age = models.IntegerField(verbose_name='Age', null=True)
@@ -128,7 +129,7 @@ class History(CommonInfo):
         related_name='history'
     )
     address = models.CharField(
-        default=None, verbose_name="Address", max_length=50)
+        default=None, verbose_name="Address", max_length=255, null=True, blank=True)
     latitude = models.FloatField(
         default=None, verbose_name="Latitude")
     longitude = models.FloatField(

@@ -23,7 +23,7 @@ from .serializers import (
 
 class PetViewSet(ModelViewSet):
     serializer_class = PetSerializer
-    queryset = Pet.objects.all()
+    queryset = Pet.objects.filter(deleted=False)
     permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
@@ -48,7 +48,8 @@ class PetViewSet(ModelViewSet):
                     'history': history.id
                 }, status=status.HTTP_201_CREATED)
             return Response({
-                'message': 'Erro ao cadastrar Pet!'
+                'message': 'Erro ao cadastrar Pet!',
+                'errors': historySerializer.errors
             }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'message': e}, status=status.HTTP_400_BAD_REQUEST)
